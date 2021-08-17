@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generate.KhDao">
+  <resultMap id="BaseResultMap" type="generate.Kh">
+    <id column="kid" jdbcType="INTEGER" property="kid" />
+    <result column="kname" jdbcType="VARCHAR" property="kname" />
+    <result column="kphone" jdbcType="INTEGER" property="kphone" />
+    <result column="kphonee" jdbcType="INTEGER" property="kphonee" />
+    <result column="lid" jdbcType="INTEGER" property="lid" />
+    <result column="hid" jdbcType="INTEGER" property="hid" />
+    <result column="jid" jdbcType="INTEGER" property="jid" />
+    <result column="klren" jdbcType="VARCHAR" property="klren" />
+    <result column="kyou" jdbcType="INTEGER" property="kyou" />
+    <result column="jadd" jdbcType="VARCHAR" property="jadd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    kid, kname, kphone, kphonee, lid, hid, jid, klren, kyou, jadd
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from kh
+    where kid = #{kid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from kh
+    where kid = #{kid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="kid" keyProperty="kid" parameterType="generate.Kh" useGeneratedKeys="true">
+    insert into kh (kname, kphone, kphonee, 
+      lid, hid, jid, klren, 
+      kyou, jadd)
+    values (#{kname,jdbcType=VARCHAR}, #{kphone,jdbcType=INTEGER}, #{kphonee,jdbcType=INTEGER}, 
+      #{lid,jdbcType=INTEGER}, #{hid,jdbcType=INTEGER}, #{jid,jdbcType=INTEGER}, #{klren,jdbcType=VARCHAR}, 
+      #{kyou,jdbcType=INTEGER}, #{jadd,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="kid" keyProperty="kid" parameterType="generate.Kh" useGeneratedKeys="true">
+    insert into kh
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="kname != null">
+        kname,
+      </if>
+      <if test="kphone != null">
+        kphone,
+      </if>
+      <if test="kphonee != null">
+        kphonee,
+      </if>
+      <if test="lid != null">
+        lid,
+      </if>
+      <if test="hid != null">
+        hid,
+      </if>
+      <if test="jid != null">
+        jid,
+      </if>
+      <if test="klren != null">
+        klren,
+      </if>
+      <if test="kyou != null">
+        kyou,
+      </if>
+      <if test="jadd != null">
+        jadd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="kname != null">
+        #{kname,jdbcType=VARCHAR},
+      </if>
+      <if test="kphone != null">
+        #{kphone,jdbcType=INTEGER},
+      </if>
+      <if test="kphonee != null">
+        #{kphonee,jdbcType=INTEGER},
+      </if>
+      <if test="lid != null">
+        #{lid,jdbcType=INTEGER},
+      </if>
+      <if test="hid != null">
+        #{hid,jdbcType=INTEGER},
+      </if>
+      <if test="jid != null">
+        #{jid,jdbcType=INTEGER},
+      </if>
+      <if test="klren != null">
+        #{klren,jdbcType=VARCHAR},
+      </if>
+      <if test="kyou != null">
+        #{kyou,jdbcType=INTEGER},
+      </if>
+      <if test="jadd != null">
+        #{jadd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="generate.Kh">
+    update kh
+    <set>
+      <if test="kname != null">
+        kname = #{kname,jdbcType=VARCHAR},
+      </if>
+      <if test="kphone != null">
+        kphone = #{kphone,jdbcType=INTEGER},
+      </if>
+      <if test="kphonee != null">
+        kphonee = #{kphonee,jdbcType=INTEGER},
+      </if>
+      <if test="lid != null">
+        lid = #{lid,jdbcType=INTEGER},
+      </if>
+      <if test="hid != null">
+        hid = #{hid,jdbcType=INTEGER},
+      </if>
+      <if test="jid != null">
+        jid = #{jid,jdbcType=INTEGER},
+      </if>
+      <if test="klren != null">
+        klren = #{klren,jdbcType=VARCHAR},
+      </if>
+      <if test="kyou != null">
+        kyou = #{kyou,jdbcType=INTEGER},
+      </if>
+      <if test="jadd != null">
+        jadd = #{jadd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where kid = #{kid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="generate.Kh">
+    update kh
+    set kname = #{kname,jdbcType=VARCHAR},
+      kphone = #{kphone,jdbcType=INTEGER},
+      kphonee = #{kphonee,jdbcType=INTEGER},
+      lid = #{lid,jdbcType=INTEGER},
+      hid = #{hid,jdbcType=INTEGER},
+      jid = #{jid,jdbcType=INTEGER},
+      klren = #{klren,jdbcType=VARCHAR},
+      kyou = #{kyou,jdbcType=INTEGER},
+      jadd = #{jadd,jdbcType=VARCHAR}
+    where kid = #{kid,jdbcType=INTEGER}
+  </update>
+</mapper>

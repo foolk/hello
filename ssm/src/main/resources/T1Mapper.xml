@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口-->
+<mapper namespace="com.zhangzk.student.mapper.T1Mapper">
+	<select id="qList" resultType="Kh" parameterType="Kh">
+		select kh.*,ly.lname,hy.hname,jb.jname from kh left join ly on kh.lid = ly.lid left join hy on kh.hid = hy.hid left join jb on kh.jid = jb.jid 
+		<where>
+			<if test="kname != null">
+				and kname like "%"#{kname}"%"
+			</if>
+			<if test="lid > 0">
+				and kh.lid = #{lid}
+			</if>
+			<if test="hid > 0">
+				and kh.hid = #{hid}
+			</if>
+			<if test="jid > 0">
+				and kh.jid = #{jid}
+			</if>
+		</where>
+		
+		limit #{index},#{pageSize}
+	</select>
+	
+	<select id="lList" resultType="Ly" >
+		select * from  ly
+	</select>
+	
+	
+	<select id="hList" resultType="Hy" >
+		select * from  hy
+	</select>
+	
+	
+	<select id="jList" resultType="Jb" >
+		select * from  jb
+	</select>
+	
+	
+	<select id="qone" parameterType="int" resultType="Kh">
+		select kh.*,ly.lname,hy.hname,jb.jname from kh left join ly on kh.lid = ly.lid left join hy on kh.hid = hy.hid left join jb on kh.jid = jb.jid where  kh.kid = #{kid} 
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from kh where kid=#{kid}
+	</delete>
+	
+	<update id="update" parameterType="Kh" >
+		update kh set kname = #{kname},kphone = #{kphone},kphonee = #{kphonee},lid = #{lid},hid = #{hid},jid = #{jid},klren = #{klren},kyou = #{kyou},jadd = #{jadd} where kid=#{kid}
+	</update>
+	
+	<select id="getCount" resultType="int">
+		select count(*) from kh left join ly on kh.lid = ly.lid left join hy on kh.hid = hy.hid left join jb on kh.jid = jb.jid 
+	</select>
+	
+	<insert id="add" parameterType="Kh" >
+		insert into kh (kname,kphone,kphonee,lid,hid,jid,klren,kyou,jadd) values (#{kname},#{kphone},#{kphonee},#{lid},#{hid},#{jid},#{klren},#{kyou},#{jadd})
+	</insert>
+
+
+	
+</mapper>
